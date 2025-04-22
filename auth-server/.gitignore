@@ -1,0 +1,9 @@
+\config.json
+\node_modules
+\jspm_packages
+
+# serverless directories
+.serverless
+
+\package-lock.json
+# \package.json
