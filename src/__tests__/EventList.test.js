@@ -3,7 +3,7 @@ import { render } from "@testing-library/react";
 import EventList from "../components/EventList";
 import Event from "../components/Event";
 
-describe('<EventList/> componrent', () => {
+describe('<EventList/> component', () => {
 
   //PASSED
   test('has an element with "list" role', () => {
