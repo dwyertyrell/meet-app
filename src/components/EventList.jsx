@@ -1,22 +1,24 @@
 import React from 'react';
 import Event from './Event';
 import PropTypes from 'prop-types';
+// import Fake from './Fake';
 
 
-const EventList = ({ events =[]  }) => {
+const EventList = ({events}) => {
   return (
-    <>
+    
       <ul  id="event-list">  
-      {events.map((event) => { <Event key={event.id} event={event} /> })};
+        {events.map((event) => { <Event key={event.id} event={event} /> })};
       </ul>
-    </>
+
+    
 );
 }
 
 export default EventList;
 
 EventList.PropTypes = {
-  events: PropTypes.array
+  events: PropTypes.array.isRequired
 }
 
 

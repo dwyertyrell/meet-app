@@ -6,6 +6,3 @@ const Event = () => {
 
 export default Event;
 
-/* const Event = (event) => {
-  return  <li>{event}</li> ;
-} */

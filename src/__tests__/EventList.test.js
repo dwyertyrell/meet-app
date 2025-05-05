@@ -3,6 +3,7 @@ import { render } from "@testing-library/react";
 import EventList from "../components/EventList";
 import Event from "../components/Event";
 
+
 describe('<EventList/> component', () => {
 
   //PASSED
@@ -20,7 +21,8 @@ test('renders a listitem in the <Event/>', () => {
 
 
 
-//FAILED
+
+//FAILED- let's changed getAllByRole with queryByRole; and toHaveLength(4) with toBeInTheDocument()
  test('renders correct number of events', () => {
     const EventListComponent = render(<EventList events={[{id:1}, {id:2}, {id:3}, {id:4}]} />);
     expect(EventListComponent.getAllByRole("listitem")).toHaveLength(4);
