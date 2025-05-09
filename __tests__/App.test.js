@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import React from 'react';
-import App from '../src/App';
+import App from '../src/App.jsx';
 
 /*npm run test  */
 describe('<App /> component', () => {
@@ -16,17 +16,17 @@ let rootDOMNode;
 
 beforeEach(() => {
   AppDOM = render(<App/>);
-  rootDOMNode = AppDOM.container.firstChild;    
+  rootDOMNode = AppDOM.container.firstChild;  
+  // AppDOM.debug();
+
 })
 
 
 test('renders list of events', () => {
-  AppDOM.debug();
   expect(rootDOMNode.querySelector('#event-list')).toBeInTheDocument();
 });
 
 test('render CitySearch', () => {
-AppDOM.debug();
 expect(rootDOMNode.querySelector('#city-search')).toBeInTheDocument();
 });
 

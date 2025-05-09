@@ -10,7 +10,7 @@ describe('<EventList /> component', () => {
   beforeEach(()=> {
 
     EventListComponent = render(<EventList />);
-    EventListComponent.debug();
+    // EventListComponent.debug();
   })
 
   //test for the "list" role in the <EventList/>
