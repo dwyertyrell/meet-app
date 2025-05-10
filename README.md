@@ -40,6 +40,10 @@ Serverless and Progressive Web Apps (PWAs) represent the future of web developme
 **Scenarios:**
 ```gherkin
 Feature: Filter Events by City
+  Scenario: When user hasn't searched for a city, show upcoming events from all cities.
+    Given I am on the events page
+    When I have not searched for a specific city
+    Then I should see upcoming events from all cities
   Scenario: User should see a list of suggestions when they search for a city
     Given the user is on the main page
     When the user starts typing in the city search box
