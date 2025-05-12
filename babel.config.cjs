@@ -4,4 +4,6 @@ module.exports = {
     '@babel/preset-react',
   ],
  };
- 
+
+ /*This file configures Babel, a tool that transpiles modern JavaScript (ES6+) 
+ and JSX into a version that’s compatible with older browsers or environments. */
