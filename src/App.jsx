@@ -64,6 +64,10 @@ const App = () => {
   const [allEvents, setAllEvents] = useState([]);
   // const [loading, setLoading] = useState(true); remove logic for loading state
 
+  useEffect(() => {
+  fetchEvents();
+  }, []);
+  
   const fetchEvents = async () => {
     try {
 
@@ -76,9 +80,7 @@ const App = () => {
     }
   };
 
-  useEffect(() => {
-  fetchEvents;
-  }, []);
+
 
   // if (loading) {
   //   return <div>Loading...</div>
