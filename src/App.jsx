@@ -52,16 +52,50 @@ depending on how the testing library processes the rendered output.*/
 
 // export default App;
 
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import EventList from './components/EventList';
 import CitySearch from './components/CitySearch';
+import NumberOfEvents from './components/NumberOfEvents';
+import {getEvents} from './app.js'
 
 
 const App = () => {
+  const [numberOfEvents, setNumberOfEvents] = useState(32);
+  const [allEvents, setAllEvents] = useState([]);
+  // const [loading, setLoading] = useState(true); remove logic for loading state
+
+  const fetchEvents = async () => {
+    try {
+
+      const events = await getEvents();
+      setAllEvents(events);
+    } catch (error) {
+      console.error('failed to fetch events', error);
+    } finally {
+      // setLoading(false)
+    }
+  };
+
+  useEffect(() => {
+  fetchEvents;
+  }, []);
+
+  // if (loading) {
+  //   return <div>Loading...</div>
+  // }
+
+  
+  const handleNumberOfEventsChange = (value) => {
+    setNumberOfEvents(Number(value));
+  };
+
+  const filteredEvents = allEvents.slice(0, numberOfEvents); //cuts the number of array elements 
+
   return (
-      <div>
-        <EventList/> 
-        <CitySearch/>  
+      <div>        
+        <NumberOfEvents defaultValue={numberOfEvents} onChange={handleNumberOfEventsChange}/>
+        <EventList events={filteredEvents} /> 
+        <CitySearch/>
       </div>
   );
 }

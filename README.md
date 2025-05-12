@@ -44,7 +44,7 @@ Feature: Filter Events by City
     Given I am on the events page
     When I have not searched for a specific city
     Then I should see upcoming events from all cities
-    
+
   Scenario: User should see a list of suggestions when they search for a city
     Given the user is on the main page
     When the user starts typing in the city search box
@@ -167,3 +167,20 @@ Feature: Display Charts Visualizing Event Details
 
 [Detailed setup instructions will be added in future updates]
 
+<!-- Additional Edge Cases for feature 2 - Show/Hide Event Details:
+While the scenarios you've described are comprehensive, consider writing unit tests for the following edge cases to ensure robustness:
+
+4. Edge Cases
+Test 4.1: Ensure the app handles an empty event list gracefully.
+
+Verify that an empty event list renders without errors.
+Confirm that a message (e.g., "No events available") is displayed when there are no events.
+Test 4.2: Ensure that multiple events can be expanded and collapsed independently.
+
+Simulate clicking "show details" for multiple events.
+Verify that each event expands independently without affecting the others.
+Simulate clicking "hide details" for multiple events and confirm the same behavior.
+Test 4.3: Ensure the UI behaves correctly when toggling events rapidly.
+
+Simulate clicking "show details" and "hide details" in quick succession.
+Verify that the app behaves as expected (e.g., no duplicate renders, no errors). -->
