@@ -32,9 +32,11 @@ module.exports.getAuthURL = async () => {
  return {
    statusCode: 200,
    headers: {
-     'Access-Control-Allow-Origin': '*',
-     'Access-Control-Allow-Credentials': true,
-   },
+    'Access-Control-Allow-Origin': '*', //'http://127.0.0.1:8080'
+    'Access-Control-Allow-Methods': 'GET, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization', // Add any other headers your app uses
+    'Access-Control-Allow-Credentials': true, // If needed
+  },
    body: JSON.stringify({
      authUrl,
    }),
@@ -65,8 +67,10 @@ module.exports.getAccessToken = async (event) => {
       return {
         statusCode: 200,
         headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Credentials': true,
+          'Access-Control-Allow-Origin': '*', //'http://127.0.0.1:8080'
+          'Access-Control-Allow-Methods': 'GET, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type, Authorization', // Add any other headers your app uses
+          'Access-Control-Allow-Credentials': true, // If needed
         },
         body: JSON.stringify(results),
       };
@@ -81,7 +85,7 @@ module.exports.getAccessToken = async (event) => {
  };
 
  module.exports.getCalendarEvents = async (event) => {
-  const accessToken = event.pathParameters.access_token;
+  const accessToken = decodeURIComponent(`${event.pathParameters.access_token}`);
   oAuth2Client.setCredentials({ access_token: accessToken });
 
   return new Promise((resolve, reject) => {
@@ -103,23 +107,32 @@ module.exports.getAccessToken = async (event) => {
     );
   })
   .then((results) => {
-    return {
+    return ({
       statusCode: 200,
       headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Credentials': true,
+        'Access-Control-Allow-Origin': '*', //'http://127.0.0.1:8080/'
+        'Access-Control-Allow-Methods': 'GET, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization', // Add any other headers your app uses
+        'Access-Control-Allow-Credentials': true, // If needed
       },
       body: JSON.stringify({ events: results.data.items }),
-    };
+    });
   })
   .catch((error) => {
-    return {
+    return ({
       statusCode: 500,
+      headers: {
+        'Access-Control-Allow-Origin': '*', //'http://127.0.0.1:8080'
+        'Access-Control-Allow-Methods': 'GET, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization', // Add any other headers your app uses
+        'Access-Control-Allow-Credentials': true, // If needed
+      },
       body: JSON.stringify(error),
-    };
-  });
-};
- 
+
+    });
+    
+    });
+ }
 
 
-
+//cmd http-server in the static -site-test directory
