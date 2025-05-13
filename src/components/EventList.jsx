@@ -16,7 +16,6 @@ const EventList = ({events}) => {
   );
 }
 
-
 export default EventList;
 
 // EventList.PropTypes = {

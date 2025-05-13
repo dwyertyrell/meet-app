@@ -65,8 +65,7 @@ const App = () => {
   // const [loading, setLoading] = useState(true); remove logic for loading state
 
   useEffect(() => {
-  fetchEvents();
-  }, []);
+ 
   
   const fetchEvents = async () => {
     try {
@@ -79,7 +78,8 @@ const App = () => {
       // setLoading(false)
     }
   };
-
+ fetchEvents();
+  }, []);
 
 
   // if (loading) {
