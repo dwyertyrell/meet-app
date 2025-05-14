@@ -56,12 +56,12 @@ import React, {useState, useEffect} from 'react';
 import EventList from './components/EventList';
 import CitySearch from './components/CitySearch';
 import NumberOfEvents from './components/NumberOfEvents';
-import {getEvents} from './app.js'
+import {getEvents} from './api.js'
 
 
 const App = () => {
   const [numberOfEvents, setNumberOfEvents] = useState(32);
-  const [allEvents, setAllEvents] = useState([]);
+  const [events, setEvents] = useState([]);
   // const [loading, setLoading] = useState(true); remove logic for loading state
 
   useEffect(() => {
@@ -70,8 +70,8 @@ const App = () => {
   const fetchEvents = async () => {
     try {
 
-      const events = await getEvents();
-      setAllEvents(events);
+      const allEvents = await getEvents();
+      setEvents(allEvents.slice(0, numberOfEvents));  //cuts the number of array elements in the fetched array, based on the local state
     } catch (error) {
       console.error('failed to fetch events', error);
     } finally {
@@ -79,7 +79,7 @@ const App = () => {
     }
   };
  fetchEvents();
-  }, []);
+  }, [numberOfEvents]);
 
 
   // if (loading) {
@@ -91,12 +91,10 @@ const App = () => {
     setNumberOfEvents(Number(value));
   };
 
-  const filteredEvents = allEvents.slice(0, numberOfEvents); //cuts the number of array elements 
-
   return (
       <div>        
         <NumberOfEvents defaultValue={numberOfEvents} onChange={handleNumberOfEventsChange}/>
-        <EventList events={filteredEvents} /> 
+        <EventList events={events} /> 
         <CitySearch/>
       </div>
   );
