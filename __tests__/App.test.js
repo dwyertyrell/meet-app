@@ -105,7 +105,6 @@ test('renders the correct number of events when user changes the number of event
     const renderedEvents = within(EventListDOM).queryAllByRole('lisitem');
     expect(renderedEvents.length).toBe(2);
 })
-  // AppComponent.debug();
 
 })
 
