@@ -1,48 +1,12 @@
-// import { render } from '@testing-library/react';
-// import React from 'react';
-// import App from '../src/App.jsx';
-
-// /*npm run test  */
-// describe('<App /> component', () => {
-// /*
-// beforeEach() code;
-// The first test;
-// beforeEach() code;
-// The second test. */
-
-
-// let AppDOM;
-// let rootDOMNode;
-
-// beforeEach(() => {
-//   AppDOM = render(<App/>);
-//   rootDOMNode = AppDOM.container.firstChild;  
-//   // AppDOM.debug();
-
-// })
-
-
-// test('renders list of events', () => {
-//   expect(rootDOMNode.querySelector('#event-list')).toBeInTheDocument();
-// });
-
-// test('render CitySearch', () => {
-// expect(rootDOMNode.querySelector('#city-search')).toBeInTheDocument();
-// });
-
-
-// });
-
-
-
 import React from "react";
-import { render, waitFor } from "@testing-library/react";
+import { render, waitFor, within } from "@testing-library/react";
 import App from "../src/App.jsx";
-import { getEvents } from "../src/app.js";
+import { getEvents } from "../src/api.js";
 import { mockData } from "../src/mock-data.js";
+import userEvent from '@testing-library/user-event';
 
 // Mock the getEvents function
-jest.mock("../src/app.js", () => ({
+jest.mock("../src/api.js", () => ({
   getEvents: jest.fn(),
 }));
 
@@ -52,6 +16,7 @@ describe("<App /> component", () => {
     getEvents.mockResolvedValue(mockData);
   });
 
+  //this test is similar to the integration test in 'EventList.test.js'. add this to another describe() ? 
   test("renders list of events", async () => {
     const { container } = render(<App />);
 
@@ -79,3 +44,32 @@ describe("<App /> component", () => {
   //   expect(loadingMessage).toBeInTheDocument();
   // });
 });
+
+describe('<App/> integration', () => {
+  test('renders a list of events matching the city selected by the user', () => {
+    const user = userEvent.setup();
+    const AppComponent = render(<App/>);
+    const AppDOM = AppComponent.container.firstChild;
+
+//again, a waitFor() callback is needed to wait for the element to be rendered after an async operation.
+    waitFor( async () => { 
+// internally render the <CitySearch/> component inside <App/>
+    const CitySearchDOM = AppDOM.querySelector('#city-search');
+    const CitySearchInput = within(CitySearchDOM).queryByRole('textbox');
+
+    await user.type(CitySearchInput, 'Berlin');
+    const berlinSuggestionItem = within(CitySearchDOM).queryByText('Berlin, Germany');
+    await user.click(berlinSuggestionItem);
+
+    const EventListDOM = AppDOM.querySelector('#event-list');
+    const allRenderedEventItems = within(EventListDOM).queryAllByRole('listitem');
+
+    const allEvents = await getEvents();
+    const berlinEvents = allEvents.filter((event) => event.location === 'Berlin, Germany')
+  
+// ensures the number of rendered events in the UI equals the number of events located in 'Berlin, Germany'
+  expect(allRenderedEventItems.length).toBe(berlinEvents.length);
+  // allRenderedEventItems.forEach((event)=> expect(event.textContent).toContain('Berlin, Germany'));
+  });
+});
+})

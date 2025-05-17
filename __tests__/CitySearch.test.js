@@ -1,8 +1,9 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import { render, within, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import CitySearch from "../src/components/CitySearch";
-import {getEvents, extractLocations} from '../src/app.js'
+import {getEvents, extractLocations} from '../src/api.js'
+import App from "../src/App.jsx";
 
 /*the virtual DOM created by the render object cannot chain with querySelector methods.
 these methods only work with real DOM node- used for targeting low level CSS in the DOM.
@@ -15,7 +16,7 @@ describe('<CitySearch/> component', ()=> {
 
   let CitySearchComponent;
   beforeEach(() => {
-    CitySearchComponent = render(<CitySearch/>);
+    CitySearchComponent = render(<CitySearch allLocations={[]}/>);
     // CitySearchComponent.debug();
   });
 
@@ -75,7 +76,7 @@ describe('<CitySearch/> component', ()=> {
       const user = userEvent.setup();
       const allEvents = await getEvents();
       const allLocations = extractLocations(allEvents);
-      CitySearchComponent.rerender(<CitySearch allLocations ={allLocations}/>);
+      CitySearchComponent.rerender(<CitySearch allLocations ={allLocations} setCurrentCity={() => { }}/>); // passing in a dummy prop  
 
       const cityTextBox = CitySearchComponent.queryByRole('textbox');
       await user.type(cityTextBox, 'Berlin');
@@ -91,3 +92,28 @@ describe('<CitySearch/> component', ()=> {
 
     });
   })
+
+describe('<CitySearch/> integration', () => {
+  
+  test('renders suggestion list when app is rendered', async () => {
+    const user = userEvent.setup();
+    const AppComponent = render(<App/>);
+    const AppDOM = AppComponent.container.firstChild;
+
+    const CitySearchDOM = AppDOM.querySelector('#city-search');
+    AppComponent.debug();
+   
+    //if the CitySearch DOM is truthy, query the textbox that is inside of it.
+    const cityTextBox =  within(CitySearchDOM).queryByRole('textbox');
+    await user.click(cityTextBox);
+    const allEvents = await getEvents();
+    const allLocations = extractLocations(allEvents);
+
+    // a waitFor() is need to pass the test- there is a timing delay on the rendering of cityTextBox node in DOM. this shouldn't be the case
+    waitFor(() => { 
+    //inside the CitySearch DOM, query for the 'listitem' role
+    const suggestionListItems = within(CitySearchDOM).queryAllByRole('listitem');
+    expect(suggestionListItems.length).toBe(allLocations.length + 1);
+    })
+  });
+})

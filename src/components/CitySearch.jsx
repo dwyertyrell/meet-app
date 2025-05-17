@@ -1,10 +1,14 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const CitySearch = ({allLocations}) => {
+const CitySearch = ({allLocations, setCurrentCity}) => {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [query, setQuery] = useState('');
   const [suggestions, setSuggestions] = useState([]);
+
+ useEffect(() => {
+   setSuggestions(allLocations);
+ }, [`${allLocations}`]);
 
   const handleInputChanged = (event) => {
     const value = event.target.value; //we explicity declared the value twice, from two different perspectives- here; the onChange attribute, and the value attribute. what is the name of this technique?
@@ -23,7 +27,7 @@ const CitySearch = ({allLocations}) => {
     const value= event.target.textContent; //the textContent is of the suggested listitem- since that is the element click on during the event.
     setQuery(value);
     setShowSuggestions(false); //to hide suggestions after the user clicked on the chosen listitem. 
-
+    setCurrentCity(value)
   }
 
   return (
@@ -31,7 +35,7 @@ const CitySearch = ({allLocations}) => {
       <div id='city-search'></div>
       <input  
         className='city' 
-        type='textbox'
+        type="textbox"
         value={query}
         onFocus={()=>{setShowSuggestions(true)}}
         onChange={handleInputChanged}

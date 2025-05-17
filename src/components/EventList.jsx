@@ -1,6 +1,6 @@
 import React from 'react';
 import Event from './Event';
-import PropTypes from 'prop-types';
+import {PropTypes as propTypes} from 'prop-types';
 
 /* we could add an initial state on the events prop- so there will always be a value to render;
 or conditionally render the component only when the prop is truthy.  */
@@ -18,8 +18,8 @@ const EventList = ({events}) => {
 
 export default EventList;
 
-// EventList.PropTypes = {
+// EventList.propTypes = {
 //   events: propTypes.shape({
-    
+
 //   })
 // }

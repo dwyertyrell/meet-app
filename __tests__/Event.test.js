@@ -2,7 +2,7 @@ import React from "react";
 import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import Event from '../src/components/Event';
-import { getEvents } from "../src/app";
+import { getEvents } from "../src/api";
 
 describe('<Event/> component', () => {
 
