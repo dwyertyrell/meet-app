@@ -29,7 +29,7 @@ const token = await getAccessToken();
     const result = await response.json();
 
     if(result) {
-      return result;
+      return result.events;
     } else return null;
   }
 };
