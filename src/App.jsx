@@ -26,12 +26,13 @@ const App = () => {
       )
       
       setEvents(allEvents.slice(0, numberOfEvents));  //cuts the number of array elements in the fetched array, based on the local state
-      console.log('API response', events)
       setAllLocations(extractLocations(allEvents));
     } catch (error) {
       console.error('failed to fetch events', error);
     } finally {
       // setLoading(false)
+            // console.log('API response', events)
+
     }
   };
   // if (loading) {

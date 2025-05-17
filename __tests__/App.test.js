@@ -72,4 +72,41 @@ describe('<App/> integration', () => {
   // allRenderedEventItems.forEach((event)=> expect(event.textContent).toContain('Berlin, Germany'));
   });
 });
+
+test('renders the correct number of events when user changes the number of events input', async () => {
+  const user = userEvent.setup();
+  const AppComponent = render(<App/>)
+  const AppDOM = AppComponent.container.firstChild;
+
+  const NumberOfEventsInput = AppDOM.querySelector('#number-of-events')
+  expect(NumberOfEventsInput).toBeInTheDocument();
+
+
+  // //wait for the initial event list to appear
+  // const NumberOfEventsInput = await waitFor(() => {
+  //   AppDOM.querySelector('#number-of-events');
+  // });      
+  // expect(NumberOfEventsInput).toBeInTheDocument();
+
+  const EventListDOM = await AppDOM.querySelector('#event-list');
+  expect(EventListDOM).toBeInTheDocument();
+
+  // //wait for initial event list to load
+  // const EventListDOM = await waitFor(() => {
+  //   AppDOM.querySelector('event-list');
+  // });
+  //   expect(EventListDOM).toBeInTheDocument();
+
+
+  await user.type(NumberOfEventsInput, '{backspace}{backspace}1');
+
+ 
+  waitFor(() => {
+    const renderedEvents = within(EventListDOM).queryAllByRole('lisitem');
+    expect(renderedEvents.length).toBe(2);
+})
+  // AppComponent.debug();
+
+})
+
 })
