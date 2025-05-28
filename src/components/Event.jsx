@@ -9,14 +9,14 @@ const Event = ({event}) => {
   };
 
 return (
-  <li>
+  <li className='event'>
     <h3>{event.summary}</h3>
     <p>{event.created}</p>
     <p>{event.location}</p>
-    
-    {detailsVisible && <p>{event.description}</p>}
+    {/*previously had the className='details' in <p> tag */}
+    {detailsVisible && <p id={`details-${event.id}`} className='details'>{event.description}</p>}
 
-    <button onClick={toggleDetails}>
+    <button className='details-button' onClick={toggleDetails}>
       {detailsVisible ? 'Hide Details' : 'Show Details'}
     </button>
     
@@ -31,5 +31,6 @@ Event.propTypes = {
     created: propTypes.string.isRequired,
     location: propTypes.string.isRequired,
     description:propTypes.string.isRequired,
+    id:propTypes.string.isRequired,
   })
 }

@@ -101,7 +101,7 @@ describe('<CitySearch/> integration', () => {
     const AppDOM = AppComponent.container.firstChild;
 
     const CitySearchDOM = AppDOM.querySelector('#city-search');
-    AppComponent.debug();
+    // AppComponent.debug();
    
     //if the CitySearch DOM is truthy, query the textbox that is inside of it.
     const cityTextBox =  within(CitySearchDOM).queryByRole('textbox');

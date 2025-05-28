@@ -1,10 +1,12 @@
-// step definition files are written in js aun by jest
+// step definition files are written in js by jest
 import React from 'react';
 import { loadFeature, defineFeature } from 'jest-cucumber';
 import { render, within, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from '../App.jsx'
 import { getEvents } from '../api.js';
+
+/*Acceptance test for feature 1 */
 
 //to load a gherkin file
 const feature = loadFeature('./src/features/filterEventsByCity.feature');

@@ -8,7 +8,7 @@ const CitySearch = ({allLocations, setCurrentCity}) => {
 
  useEffect(() => {
    setSuggestions(allLocations);
- }, [`${allLocations}`]);
+ }, [allLocations]);
 
   const handleInputChanged = (event) => {
     const value = event.target.value; //we explicity declared the value twice, from two different perspectives- here; the onChange attribute, and the value attribute. what is the name of this technique?
@@ -32,22 +32,23 @@ const CitySearch = ({allLocations, setCurrentCity}) => {
 
   return (
     <div>
-      <div id='city-search'></div>
-      <input  
-        className='city' 
-        type="textbox"
-        value={query}
-        onFocus={()=>{setShowSuggestions(true)}}
-        onChange={handleInputChanged}
+      <div id='city-search'>
+        <input  
+          className='city' 
+          type="textbox"
+          value={query}
+          onFocus={()=>{setShowSuggestions(true)}}
+          onChange={handleInputChanged}
 
-      ></input>
-    { showSuggestions ? (<ul className='suggestions'>
-        {/* once the local state is updated with the filteredLocations, map it inside the <ul> as listitems  */}
-        {suggestions.map((suggestion) => {
-          return <li key={suggestion} onClick={handleItemClicked}>{suggestion}</li>
-        })}
-        <li key='see all cities'>see all cities from suggestions</li>
-      </ul>) : null}
+        ></input>
+      { showSuggestions ? (<ul className='suggestions'>
+          {/* once the local state is updated with the filteredLocations, map it inside the <ul> as listitems  */}
+          {suggestions.map((suggestion) => {
+            return <li key={suggestion} onClick={handleItemClicked}>{suggestion}</li>
+          })}
+          <li key='see all cities' onClick={handleItemClicked}>see all cities from suggestions</li>
+        </ul>) : null}
+      </div>
     </div>
   )}
 export default CitySearch;

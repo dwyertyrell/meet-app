@@ -20,16 +20,18 @@ describe('<EventList /> component', () => {
   });
 
   test('has elements with "listitem" role',  () => {
-    EventListComponent.debug();
+    // EventListComponent.debug();
     expect(EventListComponent.getAllByRole("listitem")).toHaveLength(allEvents.length);
   });
 
   test('renders event summary, start time, location for each event', () => {
 
-    allEvents.forEach((element) => {
-      expect(EventListComponent.queryByText(element.summary)).toBeInTheDocument();
-      expect(EventListComponent.queryByText(element.created)).toBeInTheDocument();
-      expect(EventListComponent.queryByText(element.location)).toBeInTheDocument();
+    const listItems = EventListComponent.getAllByRole('listitem');
+    allEvents.forEach((element, index) => {
+      const li = listItems[index]
+      expect(within(li).queryByText(element.summary)).toBeInTheDocument();
+      expect(within(li).queryByText(element.created)).toBeInTheDocument();
+      expect(within(li).queryByText(element.location)).toBeInTheDocument();
     });
   })
 });
@@ -44,7 +46,7 @@ describe('<EventList/> integration', () => {
 
     await waitFor(()=> { // waitFor() keeps re-calling the callback until the code passes.
       const EventListItems = within(EventListDOM).queryAllByRole('listitem'); // if the the EventListDOM passes, we (use the type of queries on the returned object render() ) query the <li> elements from within the DOM node of EventListDOM
-      expect(EventListItems).toHaveLength(2);
+      expect(EventListItems).toHaveLength(32);
     });
   })
 
