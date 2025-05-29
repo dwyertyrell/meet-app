@@ -49,3 +49,5 @@ describe('show/hide an event details', () => {
     expect(eventDetails).toBeNull();
   });
 });
+
+//add end to end test for feature 1 in another describe()
