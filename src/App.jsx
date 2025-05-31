@@ -46,10 +46,10 @@ const App = () => {
   };
 
   return (
-      <div>        
+      <div>         
+        <CitySearch allLocations={allLocations} setCurrentCity={setCurrentCity}/> 
         <NumberOfEvents defaultValue={numberOfEvents} onChange={handleNumberOfEventsChange}/>
         <EventList events={events} /> 
-        <CitySearch allLocations={allLocations} setCurrentCity={setCurrentCity}/> 
       </div>
   );
 }
