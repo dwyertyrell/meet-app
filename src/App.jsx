@@ -25,7 +25,7 @@ const App = () => {
         allEvents.filter((event) => event.location === currentCity) 
       )
       
-      setEvents(allEvents.slice(0, numberOfEvents));  //cuts the number of array elements in the fetched array, based on the local state
+      setEvents(filteredEvents.slice(0, numberOfEvents));  //cuts the number of array elements in the fetched array, based on the local state
       setAllLocations(extractLocations(allEvents));
     } catch (error) {
       console.error('failed to fetch events', error);
