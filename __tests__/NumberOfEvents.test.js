@@ -31,7 +31,10 @@ describe('<NumberOfEvents/> component', () => {
   test('calls onChange callback when input value changes', async () => {
     const user = userEvent.setup();
     const handleChange = jest.fn();
-    NumberOfEventsComponent.rerender(<NumberOfEvents onChange ={handleChange} />);
+    const setErrorAlert= jest.fn();
+    NumberOfEventsComponent.rerender(<NumberOfEvents 
+      onChange ={handleChange} 
+      setErrorAlert={setErrorAlert} />);
     input = NumberOfEventsComponent.getByRole('textbox');
 
     await user.type(input, `{backspace}{backspace}20`);

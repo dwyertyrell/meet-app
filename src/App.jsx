@@ -3,6 +3,7 @@ import EventList from './components/EventList';
 import CitySearch from './components/CitySearch';
 import NumberOfEvents from './components/NumberOfEvents';
 import {getEvents, extractLocations} from './api.js'
+import { ErrorAlert, InfoAlert } from './components/Alert.jsx';
 
 
 const App = () => {
@@ -11,13 +12,16 @@ const App = () => {
   const [allLocations, setAllLocations] = useState([]);
   const [currentCity, setCurrentCity] = useState('See all cities');
   // const [loading, setLoading] = useState(true); remove logic for loading state
+  const [infoAlert, setInfoAlert] = useState('');
+  const [errorAlert, setErrorAlert] = useState('');
 
   useEffect(() => {
 
 
  const fetchData = async () => {
     try {
-
+      /*upon render, load either a full list of events, or filtered events by their location
+      the child components will update the setter functions of the state variables*/
       const allEvents = await getEvents();
       const filteredEvents = currentCity === 'See all cities' ? (
       allEvents 
@@ -42,13 +46,34 @@ const App = () => {
   }, [currentCity, numberOfEvents]);
   
   const handleNumberOfEventsChange = (value) => {
-    setNumberOfEvents(Number(value));
+    errorAlert.length === 0 ? (
+      setNumberOfEvents(Number(value)) 
+    ) : null;
   };
 
   return (
-      <div>         
-        <CitySearch allLocations={allLocations} setCurrentCity={setCurrentCity}/> 
-        <NumberOfEvents defaultValue={numberOfEvents} onChange={handleNumberOfEventsChange}/>
+      <div>    
+        <div className='alert-container'>
+          {/*using the inforAlert state to pass text into the component. pass its
+          setter function into <CitySearch/> to update its text*/}
+          {infoAlert.length ? (
+            <InfoAlert text={infoAlert}/>
+          ): 
+          errorAlert.length ? (
+           <ErrorAlert text= {errorAlert}/>
+           ): 
+           null} 
+           </div>     
+        <CitySearch 
+        allLocations={allLocations} 
+        setCurrentCity={setCurrentCity}
+        setInfoAlert={setInfoAlert}
+        /> 
+        <NumberOfEvents 
+        defaultValue={numberOfEvents} 
+        onChange={handleNumberOfEventsChange}
+        setErrorAlert={setErrorAlert}
+        />
         <EventList events={events} /> 
       </div>
   );
