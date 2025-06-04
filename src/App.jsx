@@ -54,7 +54,7 @@ useEffect(() => {
     
       updateOnlineStatus();
       fetchData();
-
+      console.log(warningAlert);
   //clean up function- to remove event listeners
   return (() => {
       window.removeEventListener('online', updateOnlineStatus);
