@@ -38,16 +38,28 @@ useEffect(() => {
 
     }
   };
-  // if (loading) {
-  //   return <div>Loading...</div>
-  // }
+      // if (loading) {
+      //   return <div>Loading...</div>
+      // }
 
-  if (navigator.online) {
-        setWarningAlert('');
-      }else {
-        setWarningAlert('data is used from localStorage, which could be outdated')
+      function updateOnlineStatus() {
+        if (navigator.online) {
+            setWarningAlert('');
+          }else {
+            setWarningAlert('data is used from localStorage, which could be outdated')
+          }
       }
-    fetchData();
+      window.addEventListener('online', updateOnlineStatus);
+      window.addEventListener('offline', updateOnlineStatus);
+    
+      updateOnlineStatus();
+      fetchData();
+
+  //clean up function- to remove event listeners
+  return (() => {
+      window.removeEventListener('online', updateOnlineStatus);
+  window.removeEventListener('offline', updateOnlineStatus);
+  })
   }, [currentCity, numberOfEvents, warningAlert, setWarningAlert]);
   
   const handleNumberOfEventsChange = (value) => {
