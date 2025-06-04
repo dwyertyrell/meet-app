@@ -49,7 +49,7 @@ useEffect(() => {
       }
 
     fetchData();
-  }, [currentCity, numberOfEvents]);
+  }, [currentCity, numberOfEvents, setWarningAlert]);
   
   const handleNumberOfEventsChange = (value) => {
     errorAlert.length === 0 ? (
