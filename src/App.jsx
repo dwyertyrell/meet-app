@@ -3,7 +3,7 @@ import EventList from './components/EventList';
 import CitySearch from './components/CitySearch';
 import NumberOfEvents from './components/NumberOfEvents';
 import {getEvents, extractLocations} from './api.js'
-import { ErrorAlert, InfoAlert } from './components/Alert.jsx';
+import { ErrorAlert, InfoAlert, WarningAlert } from './components/Alert.jsx';
 
 
 const App = () => {
@@ -14,10 +14,9 @@ const App = () => {
   // const [loading, setLoading] = useState(true); remove logic for loading state
   const [infoAlert, setInfoAlert] = useState('');
   const [errorAlert, setErrorAlert] = useState('');
+  const [warningAlert, setWarningAlert] = useState('');
 
-  useEffect(() => {
-
-
+useEffect(() => {
  const fetchData = async () => {
     try {
       /*upon render, load either a full list of events, or filtered events by their location
@@ -42,7 +41,14 @@ const App = () => {
   // if (loading) {
   //   return <div>Loading...</div>
   // }
- fetchData();
+
+  if (navigator.online) {
+        setWarningAlert('');
+      }else {
+        setWarningAlert('data is used from localStorage, which could be outdated')
+      }
+
+    fetchData();
   }, [currentCity, numberOfEvents]);
   
   const handleNumberOfEventsChange = (value) => {
@@ -61,6 +67,9 @@ const App = () => {
           ): 
           errorAlert.length ? (
            <ErrorAlert text= {errorAlert}/>
+           ): 
+           warningAlert.length ? (
+            <WarningAlert text = {warningAlert}/>
            ): 
            null} 
            </div>     
