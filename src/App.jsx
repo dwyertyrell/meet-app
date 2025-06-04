@@ -47,9 +47,8 @@ useEffect(() => {
       }else {
         setWarningAlert('data is used from localStorage, which could be outdated')
       }
-
     fetchData();
-  }, [currentCity, numberOfEvents, setWarningAlert]);
+  }, [currentCity, numberOfEvents, warningAlert, setWarningAlert]);
   
   const handleNumberOfEventsChange = (value) => {
     errorAlert.length === 0 ? (
@@ -68,8 +67,8 @@ useEffect(() => {
           errorAlert.length ? (
            <ErrorAlert text= {errorAlert}/>
            ): 
-           warningAlert.length ? (
-            <WarningAlert text = {warningAlert}/>
+           warningAlert.length && !navigator.online ? (
+            <WarningAlert text = { warningAlert}/>
            ): 
            null} 
            </div>     
