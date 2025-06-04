@@ -20,13 +20,15 @@ export const getEvents = async () => {
    return mockData;
  }
 
-const token = await getAccessToken();
-
-  if (!navigator.onLine) {
+if (!navigator.onLine) {
     const events = localStorage.getItem("lastEvents");
     NProgress.done();
     return events?JSON.parse(events):[];
   }
+  
+const token = await getAccessToken();
+
+  
 
   if(token) {
     removeQuery();
