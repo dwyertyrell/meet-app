@@ -68,5 +68,4 @@ Alert.propTypes = {
 };
 
 export {InfoAlert, WarningAlert, ErrorAlert};
-export {InfoAlert, WarningAlert, ErrorAlert};
 
