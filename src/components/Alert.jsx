@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 //a subclass to the Component class in react. It will also be a child compoennt to <App/>
 
@@ -62,6 +63,10 @@ class ErrorAlert extends Alert {
 }
 
 
+Alert.propTypes = {
+  text: PropTypes.string.isRequired
+};
 
+export {InfoAlert, WarningAlert, ErrorAlert};
 export {InfoAlert, WarningAlert, ErrorAlert};
 

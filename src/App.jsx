@@ -43,7 +43,7 @@ useEffect(() => {
       // }
 
       function updateOnlineStatus() {
-        if (navigator.online) {
+        if (navigator.onLine) {
             setWarningAlert('');
           }else {
             setWarningAlert('data is used from localStorage, which could be outdated')
@@ -58,9 +58,9 @@ useEffect(() => {
   //clean up function- to remove event listeners
   return (() => {
       window.removeEventListener('online', updateOnlineStatus);
-  window.removeEventListener('offline', updateOnlineStatus);
+      window.removeEventListener('offline', updateOnlineStatus);
   })
-  }, [currentCity, numberOfEvents, warningAlert, setWarningAlert]);
+  }, [currentCity, numberOfEvents, warningAlert]);
   
   const handleNumberOfEventsChange = (value) => {
     errorAlert.length === 0 ? (
@@ -79,7 +79,7 @@ useEffect(() => {
           errorAlert.length ? (
            <ErrorAlert text= {errorAlert}/>
            ): 
-           warningAlert.length && !navigator.online ? (
+           warningAlert.length? (
             <WarningAlert text = { warningAlert}/>
            ): 
            null} 
