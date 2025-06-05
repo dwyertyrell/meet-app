@@ -63,9 +63,10 @@ class ErrorAlert extends Alert {
 }
 
 
-Alert.propTypes = {
-  text: PropTypes.string.isRequired
-};
+
 
 export {InfoAlert, WarningAlert, ErrorAlert};
 
+Alert.propTypes = {
+  text: PropTypes.string.isRequired
+};
