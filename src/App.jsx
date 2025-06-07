@@ -42,7 +42,11 @@ useEffect(() => {
       //   return <div>Loading...</div>
       // }
 
-      function updateOnlineStatus() {
+   fetchData();
+  }, [currentCity, numberOfEvents, warningAlert]);
+  
+  useEffect(() => {
+        function updateOnlineStatus() {
         if (navigator.onLine) {
             setWarningAlert('');
           }else {
@@ -53,15 +57,14 @@ useEffect(() => {
       window.addEventListener('offline', updateOnlineStatus);
     
       updateOnlineStatus();
-      fetchData();
+     
       console.log(warningAlert);
   //clean up function- to remove event listeners
   return (() => {
       window.removeEventListener('online', updateOnlineStatus);
       window.removeEventListener('offline', updateOnlineStatus);
   })
-  }, [currentCity, numberOfEvents, warningAlert]);
-  
+  }, [warningAlert])
   const handleNumberOfEventsChange = (value) => {
     errorAlert.length === 0 ? (
       setNumberOfEvents(Number(value)) 
