@@ -43,7 +43,7 @@ useEffect(() => {
       // }
 
    fetchData();
-  }, [currentCity, numberOfEvents, warningAlert]);
+  }, [currentCity, numberOfEvents]);
   
   useEffect(() => {
         function updateOnlineStatus() {
