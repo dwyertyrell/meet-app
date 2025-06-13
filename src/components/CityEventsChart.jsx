@@ -22,15 +22,15 @@ import {
       const data = allLocations.map((location) => {
         const count = events.filter((event) => event.location === location).length
         
-        const  getCityName = (location) => {
-          if (location.includes('-')) {
-            return location.split('-')[0];
-          } else if(location.includes(',')){
-            return location.split(',')[0];
-          } else {
-            return location.trim()
-          }
-        }
+        // const  getCityName = (location) => {
+        //   if (location.includes('-')) {
+        //     return location.split('-')[0];
+        //   } else if(location.includes(',')){
+        //     return location.split(',')[0];
+        //   } else {
+        //     return location.trim()
+        //   }
+        // }
         // const city = getCityName(location);
         const city = location.split((/, | - /))[0];
 
@@ -44,7 +44,7 @@ import {
         margin={{
           top: 20,
           right: 20,
-          bottom: 20,
+          bottom: 60,
           left: 20,
         }}
       >
