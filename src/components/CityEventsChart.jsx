@@ -49,7 +49,7 @@ import {
         }}
       >
         <CartesianGrid />
-        <XAxis type="category" dataKey="city" name="City" />
+        <XAxis type="category" dataKey="city" name="City" interval={0} angle={60} tick={{ dx: 20, dy: 40, fontSize: 14 }} />
         <YAxis type="number" dataKey="count" name="number of events" allowDecimals={false} />
         <Tooltip cursor={{ strokeDasharray: '3 3' }} />
         <Scatter name="A school" data={data} fill="#8884d8" />
