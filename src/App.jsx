@@ -4,6 +4,7 @@ import CitySearch from './components/CitySearch';
 import NumberOfEvents from './components/NumberOfEvents';
 import {getEvents, extractLocations} from './api.js'
 import { ErrorAlert, InfoAlert, WarningAlert } from './components/Alert.jsx';
+import CityEventsChart from './components/CityEventsChart.jsx';
 
 
 const App = () => {
@@ -96,6 +97,10 @@ useEffect(() => {
         defaultValue={numberOfEvents} 
         onChange={handleNumberOfEventsChange}
         setErrorAlert={setErrorAlert}
+        />
+        <CityEventsChart 
+        allLocations={allLocations}
+        events={events}
         />
         <EventList events={events} /> 
       </div>
