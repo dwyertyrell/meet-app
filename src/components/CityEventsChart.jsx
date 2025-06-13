@@ -22,20 +22,18 @@ import {
       const data = allLocations.map((location) => {
         const count = events.filter((event) => event.location === location).length
         
-        //split the sting at the comma, and return the 1st element of array
-        const city = location.split(',')[0] // the 'Cape Town' is split into two elements- hence only 'Cape is rendered. if use split(',')[0], the location holding more than one comma, will not render. use an if-else statement within a map, to execute either split(',') if there is only 1 comma, else split(' ')
-      
-        //  let city; TRYING TO RENDER CAPE TOWN AND SANTIAGO AT SAME TIME 
-      //     // if the number of comma is one less than the words in the string 
-      //     if (location.split.length -1 ) { // for text with more than 1 comma
-      //      city= location.split(',')[0]
-      //     }else {
-      //       if(location.split){
-      //       city = location.split(' ')[0]
-      //     }}
-    
+        const  getCityName = (location) => {
+          if (location.includes('-')) {
+            return location.split('-')[0];
+          } else if(location.includes(',')){
+            return location.split(',')[0];
+          } else {
+            return location.trim()
+          }
+        }
+        const city = getCityName(location);
+
         return {city, count};
-        // return {count, number};
       })
       return data;
     }
