@@ -31,7 +31,8 @@ import {
             return location.trim()
           }
         }
-        const city = getCityName(location);
+        // const city = getCityName(location);
+        const city = location;
 
         return {city, count};
       })
