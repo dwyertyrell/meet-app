@@ -32,7 +32,7 @@ import {
           }
         }
         // const city = getCityName(location);
-        const city = location;
+        const city = location.split('')[0];
 
         return {city, count};
       })
