@@ -1,4 +1,5 @@
-import {useState, useEffect} from 'react';
+import React from 'react';
+import { useState, useEffect} from 'react';
 import CitySearch from './CitySearch';
 import {
   ScatterChart,
@@ -45,7 +46,7 @@ import {
           top: 20,
           right: 20,
           bottom: 60,
-          left: 20,
+          left: -20,
         }}
       >
         <CartesianGrid />
