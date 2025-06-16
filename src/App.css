@@ -1,5 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:500);
-#App {
+.App {
 display: flex;
   flex-direction: column;
   justify-content: center;  
@@ -8,7 +8,7 @@ display: flex;
   text-align: center;
 }
 
-#App * {
+.App * {
   box-sizing: border-box;
 }
 
@@ -101,7 +101,9 @@ input[type="number"] {
 
 .charts-container {
   display: grid;
-  grid-template-columns: 1fr 1fr
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  max-width: 900px
 }
 
 @media (max-width: 768px) {

@@ -74,7 +74,7 @@ useEffect(() => {
   };
 
   return (
-      <div id='App'>    
+      <div className='App'>    
         <div className='alert-container'>
           {/*using the inforAlert state to pass text into the component. pass its
           setter function into <CitySearch/> to update its text*/}
