@@ -1,10 +1,14 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:500);
-.App {
+#App {
+display: flex;
+  flex-direction: column;
+  justify-content: center;  
+  align-items: center;      
+  min-height: 100vh;
   text-align: center;
-  padding: 2% 5%;
 }
 
-.App * {
+#App * {
   box-sizing: border-box;
 }
 
@@ -93,4 +97,15 @@ input[type="number"] {
  left: 20px;
  width: 250px;
  z-index: 1000;
+}
+
+.charts-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr
+}
+
+@media (max-width: 768px) {
+  .charts-container{
+  grid-template-columns: 1fr;
+  }
 }

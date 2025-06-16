@@ -5,6 +5,7 @@ import NumberOfEvents from './components/NumberOfEvents';
 import {getEvents, extractLocations} from './api.js'
 import { ErrorAlert, InfoAlert, WarningAlert } from './components/Alert.jsx';
 import CityEventsChart from './components/CityEventsChart.jsx';
+import EventGenresChart from './components/EventGenresChart.jsx';
 
 
 const App = () => {
@@ -73,7 +74,7 @@ useEffect(() => {
   };
 
   return (
-      <div>    
+      <div id='App'>    
         <div className='alert-container'>
           {/*using the inforAlert state to pass text into the component. pass its
           setter function into <CitySearch/> to update its text*/}
@@ -89,21 +90,26 @@ useEffect(() => {
            null} 
            </div>     
         <CitySearch 
-        allLocations={allLocations} 
-        setCurrentCity={setCurrentCity}
-        setInfoAlert={setInfoAlert}
+          allLocations={allLocations} 
+          setCurrentCity={setCurrentCity}
+          setInfoAlert={setInfoAlert}
         /> 
         <NumberOfEvents 
-        defaultValue={numberOfEvents} 
-        onChange={handleNumberOfEventsChange}
-        setErrorAlert={setErrorAlert}
+          defaultValue={numberOfEvents} 
+          onChange={handleNumberOfEventsChange}
+          setErrorAlert={setErrorAlert}
         />
-        <CityEventsChart 
-        allLocations={allLocations}
-        events={events}
-        />
-        <EventList events={events} /> 
-      </div>
+        <div className='charts-container'>
+          <CityEventsChart 
+            allLocations={allLocations}
+            events={events}
+          />
+          <EventGenresChart
+            events={events}
+          />
+        </div>
+          <EventList events={events} /> 
+        </div>
   );
 }
 
