@@ -1,4 +1,3 @@
-
 # Meet App - Event Discovery PWA
 
 ## Project Overview
@@ -62,7 +61,7 @@ Feature: Filter Events by City
 **User Stories:**
 - As an event attendee, I should be able to see event elements in a collapsed state by default, so that I can browse many events quickly without being overwhelmed by details.
 - As an event attendee, I should be able to expand an event to see its details, so that I can learn more about events I'm interested in.
-- As an event attendee, I should be able to collapse an event to hide its details, so that I can minimize screen clutter after viewing details.
+- As an event attendee, I should be able to collapse an event to hide details, so that I can minimize screen clutter after viewing details.
 
 **Scenarios:**
 ```gherkin
@@ -163,24 +162,101 @@ Feature: Display Charts Visualizing Event Details
 - **Test-Driven Development:** High-quality, well-tested code
 - **Data Visualization:** Intuitive understanding of event statistics
 
+---
+
+## Technologies Used
+
+- **JavaScript (92.9%)** – Main application logic and all React components.
+- **HTML (3.4%)** – App structure and markup.
+- **CSS (2.2%)** – Styling, layout, and responsive design.
+- **Gherkin (1.5%)** – BDD, specifying application features and scenarios.
+- **React** – (Inferred) For building the UI as a single-page application.
+- **Workbox** – For service worker and caching strategies.
+- **Serverless Functions** – For backend API integration (e.g., AWS Lambda).
+- **Jest/Testing Library** – (Inferred) For unit and integration tests.
+- **Charting Library** – (Inferred, e.g., Recharts, Chart.js) For data visualization.
+- **Google Calendar API** – As the source of event data.
+
+---
+
+## Core Concepts & Logic Flow
+
+### 1. **Architecture Overview**
+- **Frontend:** Built with JavaScript (React is likely, given PWA and component structure), HTML, and CSS.
+- **Backend:** Serverless functions (e.g., AWS Lambda or similar) for all API interactions—no traditional server to maintain.
+- **Testing:** Gherkin for Behavior Driven Development (BDD), unit/integration tests for core logic.
+
+### 2. **Code/Logic Flow**
+- **Event Fetching:** 
+  - App loads and fetches events via serverless API (e.g., Google Calendar API, proxied through serverless function).
+  - Data is filtered and presented to the user in city-based lists.
+- **Offline Support:** 
+  - Service Worker (using Workbox) caches assets and API responses for offline usage.
+  - User can still browse previously loaded events offline.
+- **Event Details:** 
+  - Users can expand event items to see details such as description, organizer, start/end time, and location.
+- **Visualization:** 
+  - Data visualizations (charts, graphs) give insight into event trends over time or by location.
+- **Testing:** 
+  - Gherkin feature files describe user stories and acceptance criteria.
+  - Tests ensure all components, logic, and user flows work as expected.
+
+---
+
 ## Getting Started
 
-[Detailed setup instructions will be added in future updates]
+1. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+2. **Run the app locally:**
+   ```bash
+   npm start
+   ```
+3. **Run tests:**
+   ```bash
+   npm test
+   ```
+4. **Build for production:**
+   need to be run locally, for the End-to-end test to pass
+   ```bash
+   npm run build
+   ```
 
-<!-- Additional Edge Cases for feature 2 - Show/Hide Event Details:
-While the scenarios you've described are comprehensive, consider writing unit tests for the following edge cases to ensure robustness:
+---
 
-4. Edge Cases
-Test 4.1: Ensure the app handles an empty event list gracefully.
+## Project Structure (Typical)
+```
+/public              # Static assets
+/src
+  /components        # React components
+  /services          # Serverless API integration
+  /utils             # Utilities and helpers
+  /tests             # Unit/integration tests
+  mock-data.js       # Sample event data
+  service-worker.js  # PWA offline logic
+README.md
+package.json
+```
 
-Verify that an empty event list renders without errors.
-Confirm that a message (e.g., "No events available") is displayed when there are no events.
-Test 4.2: Ensure that multiple events can be expanded and collapsed independently.
+---
 
-Simulate clicking "show details" for multiple events.
-Verify that each event expands independently without affecting the others.
-Simulate clicking "hide details" for multiple events and confirm the same behavior.
-Test 4.3: Ensure the UI behaves correctly when toggling events rapidly.
+## Example Event Object (from `mock-data.js`)
+```json
+{
+  "summary": "React is Fun",
+  "description": "Learn React and build awesome UIs...",
+  "location": "Santiago, Chile",
+  "start": { "dateTime": "2020-06-29T01:00:00+02:00" },
+  "end": { "dateTime": "2020-06-29T02:00:00+02:00" },
+  "organizer": { "email": "fullstackwebdev@careerfoundry.com" }
+}
+```
 
-Simulate clicking "show details" and "hide details" in quick succession.
-Verify that the app behaves as expected (e.g., no duplicate renders, no errors). -->
+---
+
+## Contribution
+
+Pull requests are welcome! Please ensure code is well-tested and aligns with project structure and standards.
+
+---
