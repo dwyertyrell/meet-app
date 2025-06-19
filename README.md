@@ -214,11 +214,11 @@ Feature: Display Charts Visualizing Event Details
    npm start
    ```
 3. **Run tests:**
+    for the End-to-end test to pass, need to be run locally
    ```bash
    npm test
    ```
 4. **Build for production:**
-   need to be run locally, for the End-to-end test to pass
    ```bash
    npm run build
    ```
