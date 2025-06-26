@@ -260,3 +260,8 @@ package.json
 Pull requests are welcome! Please ensure code is well-tested and aligns with project structure and standards.
 
 ---
+
+## 📄 License
+
+This project is licensed under the MIT License.
+---
