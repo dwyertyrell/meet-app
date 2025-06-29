@@ -29,6 +29,8 @@ Serverless and Progressive Web Apps (PWAs) represent the future of web developme
 3. **When:** Anytime users want to view upcoming events in specific cities
 4. **Where:** Hosted online with serverless functions (e.g., AWS), accessible across devices
 5. **Why:** Demonstrate cutting-edge web development skills, including serverless architecture, PWA, TDD, and data visualization
+## Screenshots
+![Meet App Screenshot](images/client-side_view.png)
 
 ## Key Features
 
