@@ -8,7 +8,16 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
-dist
+# dist 
+# except the entry file, index.html, the whole dist/ is added  
+dist/4.9_meet-app-icons
+dist/assets
+dist/google8b579a04440eb11c.html
+dist/manifest.webmanifest
+dist/registerSW.js
+dist/service-worker.js
+dist/vite.svg
+dist/workbox-020e1147.js
 dist-ssr
 *.local
 
