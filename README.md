@@ -216,13 +216,27 @@ Feature: Display Charts Visualizing Event Details
    ```
 2. **Run the app locally:**
    ```bash
-   npm start
+   npm run dev
    ```
 3. **Run tests:**
-    for the End-to-end test to pass, need to be run locally
+    for the End-to-end test to pass, app needs to be running locally. A  separate testing environment is needed than the unit tests, therefore run:
+
    ```bash
-   npm test
+   npm run test:e2e
    ```
+
+   for the other (unit/component) tests, run: 
+
+   ```bash
+    npm run test:unit
+   ``` 
+
+   to test all tests at once:
+
+   ```bash
+   npm run test:all
+   ```
+   
 4. **Build for production:**
    ```bash
    npm run build
