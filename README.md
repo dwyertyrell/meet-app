@@ -1,5 +1,28 @@
 # Meet App - Event Discovery PWA
 
+## Table of Contents
+
+- [Project Overview](#project-overview)
+- [Context and Motivation](#context-and-motivation)
+- [5 Ws of the Project](#5-ws-of-the-project)
+- [Screenshots](#screenshots)
+- [Key Features](#key-features)
+  - [Filter Events by City](#1-filter-events-by-city)
+  - [Show/Hide Event Details](#2-showhide-event-details)
+  - [Specify Number of Events](#3-specify-number-of-events)
+  - [Use the App When Offline](#4-use-the-app-when-offline)
+  - [Add an App Shortcut to the Home Screen](#5-add-an-app-shortcut-to-the-home-screen)
+  - [Display Charts Visualizing Event Details](#6-display-charts-visualizing-event-details)
+- [Technical Benefits](#technical-benefits)
+- [Technologies Used](#technologies-used)
+- [Core Concepts & Logic Flow](#core-concepts--logic-flow)
+- [Getting Started](#getting-started)
+- [Project Structure](#project-structure-typical)
+- [Example Event Object](#example-event-object-from-mock-datajs)
+- [Testing Strategy](#testing-strategy)
+- [Contribution](#contribution)
+- [License](#-license)
+
 ## Project Overview
 
 Meet App is a progressive web application designed to help users discover and explore events in various cities. Built using modern web development techniques, the app combines serverless architecture, progressive web app (PWA) capabilities, and test-driven development to provide a robust and user-friendly experience.
@@ -236,7 +259,7 @@ Feature: Display Charts Visualizing Event Details
    ```bash
    npm run test:all
    ```
-   
+
 4. **Build for production:**
    ```bash
    npm run build
@@ -271,6 +294,113 @@ package.json
   "organizer": { "email": "fullstackwebdev@careerfoundry.com" }
 }
 ```
+
+---
+
+## Testing Strategy
+
+This project implements a comprehensive testing strategy using **Test-Driven Development (TDD)** and **Behavior-Driven Development (BDD)** approaches to ensure code quality, reliability, and user experience.
+
+### Testing Architecture
+
+The testing is organized into two main directories:
+
+#### `__tests__/` - Unit and Integration Tests
+Contains Jest-based unit and integration tests for React components and application logic:
+
+- **`App.test.js`** - Main application component tests, including rendering and integration with other components
+- **`CitySearch.test.js`** - City search functionality, autocomplete suggestions, and city selection
+- **`Event.test.js`** - Individual event component rendering, event details display and interactions  
+- **`EventList.test.js`** - Event list rendering, filtering, and event count management
+- **`NumberOfEvents.test.js`** - Number of events selector component and input validation
+- **`EndToEnd.test.js`** - End-to-end testing using Puppeteer for complete user workflows
+
+#### `src/features/` - BDD Feature Tests
+Contains Gherkin feature files and corresponding step definitions following BDD methodology:
+
+**Feature Files (.feature):**
+- **`filterEventsByCity.feature`** - User stories for city-based event filtering
+- **`showHideEventDetails.feature`** - Event detail expansion/collapse behaviors  
+- **`specifyNumberOfEvents.feature`** - Number of events selection scenarios
+
+**Step Definition Files (.test.js):**
+- **`filterEventsByCity.test.js`** - Jest-Cucumber step implementations for city filtering
+- **`showHideEventDetails.test.js`** - Step definitions for event detail interactions
+- **`specifyNumberOfEvents.test.js`** - Step implementations for event count selection
+
+### Testing Technologies
+
+#### Core Testing Framework
+- **Jest** - Primary testing framework for unit/integration tests
+- **React Testing Library** - Component testing utilities with focus on user interactions
+- **Jest-DOM** - Additional Jest matchers for DOM element assertions
+
+#### BDD Implementation  
+- **Jest-Cucumber** - Bridges Gherkin feature files with Jest test execution
+- **Gherkin Syntax** - Natural language test scenarios following Given-When-Then structure
+
+#### End-to-End Testing
+- **Puppeteer** - Headless Chrome automation for complete user journey testing
+- **Node Environment** - Separate test environment for E2E tests to avoid conflicts
+
+### Gherkin BDD Approach
+
+The project uses **Gherkin** syntax to write human-readable test scenarios that serve as:
+- **Living Documentation** - Features described in plain English
+- **Acceptance Criteria** - Clear definition of "done" for each feature
+- **Communication Tool** - Bridge between technical and non-technical stakeholders
+
+**Example Gherkin Scenario:**
+```gherkin
+Feature: Filter Events by City
+  Scenario: User can select a city from the suggested list
+    Given the user was typing in the city search box
+    And the list of suggested cities is displayed
+    When the user selects a city from the list
+    Then their city should be changed to that city
+    And the user should receive a list of upcoming events in that city
+```
+
+### Test Execution
+
+The project provides separate test commands for different testing needs:
+
+```bash
+# Run unit/component tests only (excludes E2E)
+npm run test:unit
+
+# Run end-to-end tests only (requires running dev server)
+npm run test:e2e  
+
+# Run all tests sequentially
+npm run test:all
+
+# Watch mode for development
+npm test -- --watch
+```
+
+### Test Environment Separation
+
+**Unit/Integration Tests:**
+- Environment: `jest-environment-jsdom`
+- Fast execution, mocked dependencies
+- Focus on component logic and user interactions
+
+**End-to-End Tests:**
+- Environment: `jest-environment-node`  
+- Real browser automation with Puppeteer
+- Tests complete user workflows on running application
+
+**BDD Feature Tests:**
+- Integrated with Jest using jest-cucumber
+- Combines Gherkin scenarios with Jest assertions
+- Validates user stories against actual component behavior
+
+### Testing Benefits
+
+- **Quality Assurance** - Comprehensive test coverage ensures reliable functionality
+- **Documentation** - BDD scenarios serve as executable specifications
+- **User-Centric** - Testing focuses on actual user behaviors and expectations
 
 ---
 
