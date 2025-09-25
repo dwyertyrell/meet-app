@@ -1,5 +1,5 @@
 # Meet App - Event Discovery PWA
-
+App hosted by Vercel [click here to view live app](https://meet-lac-one.vercel.app)
 ## Table of Contents
 
 - [Project Overview](#project-overview)
